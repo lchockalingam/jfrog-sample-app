@@ -1,0 +1,8 @@
+version: 1
+type: npm
+resolver:
+    repo: myfirst-npm
+    serverId: my-trial
+deployer:
+    repo: myfirst-npm-local
+    serverId: my-trial

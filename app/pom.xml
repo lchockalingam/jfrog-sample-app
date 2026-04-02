@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.jfrog.trial</groupId>
+  <artifactId>jfrog-sample-app</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <name>JFrog Sample App - Java</name>
+  <description>Maven project for trialing JFrog Artifactory Maven repositories and Xray scanning</description>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring.boot.version>3.2.0</spring.boot.version>
+    <junit.version>5.10.1</junit.version>
+  </properties>
+
+  <dependencies>
+    <!-- Spring Boot Web -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>${spring.boot.version}</version>
+    </dependency>
+    <!-- Jackson -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.16.0</version>
+    </dependency>
+    <!-- Apache Commons -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.14.0</version>
+    </dependency>
+    <!-- Test -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!--
+    ══ JFrog Artifactory Maven Repository Configuration ══════════════════════
+    Replace <YOUR_INSTANCE> with your JFrog instance hostname.
+    Create a virtual Maven repo in Artifactory and use its URL below.
+  -->
+  <repositories>
+    <repository>
+      <id>central</id>
+      <name>JFrog Artifactory - Maven Virtual</name>
+      <url>https://&lt;YOUR_INSTANCE&gt;.jfrog.io/artifactory/maven-virtual/</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>false</enabled></snapshots>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>jfrog-release</id>
+      <name>JFrog Artifactory - Maven Local</name>
+      <url>https://&lt;YOUR_INSTANCE&gt;.jfrog.io/artifactory/maven-local/</url>
+    </repository>
+    <snapshotRepository>
+      <id>jfrog-snapshot</id>
+      <name>JFrog Artifactory - Maven Snapshots</name>
+      <url>https://&lt;YOUR_INSTANCE&gt;.jfrog.io/artifactory/maven-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring.boot.version}</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

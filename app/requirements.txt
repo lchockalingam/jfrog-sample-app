@@ -1,0 +1,10 @@
+# Python dependencies for JFrog PyPI repository trial
+# Install via: pip install -r requirements.txt --index-url https://<YOUR_JFROG_INSTANCE>/artifactory/api/pypi/<REPO>/simple
+
+requests==2.31.0
+flask==3.0.0
+click==8.1.7
+pydantic==2.5.0
+python-dotenv==1.0.0
+pytest==7.4.3
+httpx==0.25.2
