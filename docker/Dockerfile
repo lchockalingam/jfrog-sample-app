@@ -4,9 +4,8 @@ FROM node:20-alpine AS builder
 WORKDIR /build
 
 COPY app/package*.json ./
-# When using JFrog as npm registry, npm install resolves from Artifactory:
-#   npm config set registry https://<INSTANCE>.jfrog.io/artifactory/api/npm/<REPO>/
-RUN npm ci --omit=dev
+# Force public npm registry for local builds
+RUN npm install --omit=dev --registry https://registry.npmjs.org
 
 COPY app/ .
 
@@ -22,12 +21,10 @@ ENV NODE_ENV=production \
 
 WORKDIR /app
 
-# Copy only production dependencies + source
 COPY --from=builder /build/node_modules ./node_modules
 COPY --from=builder /build/index.js ./
 COPY --from=builder /build/package.json ./
 
-# Non-root user for security scanning demo (Xray checks for this)
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 

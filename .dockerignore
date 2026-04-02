@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+.jfrog
+venv
+__pycache__
+*.pyc
+.git
