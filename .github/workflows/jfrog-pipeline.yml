@@ -41,10 +41,14 @@ jobs:
           jf npm install
 
       - name: Run tests
-        run: npm test
+        run: |
+          cd app
+          npm test
 
       - name: Publish NPM
-        run: jf npm publish
+        run: |
+          cd app
+          jf npm publish
 
       # Publish all build info together at the end
       - name: Publish Build info With JFrog CLI
