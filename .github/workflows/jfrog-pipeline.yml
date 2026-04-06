@@ -36,7 +36,9 @@ jobs:
         run: jf npm-config --global=true --repo-resolve=jfrog-sample-npm --repo-deploy=jfrog-sample-npm
 
       - name: Install Deps
-        run: jf npm install
+        run: |
+          cd app  
+          jf npm install
 
       - name: Run tests
         run: npm test
