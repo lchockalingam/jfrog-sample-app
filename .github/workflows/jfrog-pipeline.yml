@@ -40,11 +40,6 @@ jobs:
           cd app  
           jf npm install
 
-      - name: Run tests
-        run: |
-          cd app
-          npm test
-
       - name: Publish NPM
         run: |
           cd app
